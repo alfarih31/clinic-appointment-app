@@ -25,5 +25,9 @@ class AuthConfig:
         return self.__env.get_str("JWT_AUDIENCE")
 
     @property
+    def jwt_issuer(self) -> str:
+        return self.__env.get_str("JWT_ISSUER")
+
+    @property
     def jwt_expires(self) -> int:
         return self.__env.get_int("JWT_EXPIRES", 43200)

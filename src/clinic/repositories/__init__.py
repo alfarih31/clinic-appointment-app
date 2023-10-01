@@ -1,0 +1,5 @@
+from .appointment_alchemy_write_repository import AppointmentAlchemyWriteRepository
+from .clinic_alchemy_write_repository import ClinicAlchemyWriteRepository
+from .patient_alchemy_write_repository import PatientAlchemyWriteRepository
+
+repositories = [ClinicAlchemyWriteRepository, PatientAlchemyWriteRepository, AppointmentAlchemyWriteRepository]

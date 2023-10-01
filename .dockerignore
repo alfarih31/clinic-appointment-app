@@ -1,0 +1,13 @@
+.idea
+.vscode
+
+.DS_Store
+
+deployments/*.Dockerfile
+deployments/docker*
+
+tmp
+temp
+
+.git
+venv

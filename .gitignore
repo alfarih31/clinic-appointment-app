@@ -94,6 +94,8 @@ target/
 # Jupyter Notebook
 .ipynb_checkpoints
 *.pem
+*.key
+*.pub
 # IPython
 profile_default/
 ipython_config.py

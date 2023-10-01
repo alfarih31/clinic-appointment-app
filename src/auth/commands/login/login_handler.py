@@ -15,7 +15,7 @@ class LoginHandler(ICommandHandler[LoginCommand, LoginResult]):
     user_write_repo: IUserWriteRepo = inject(USER_WRITE_REPOSITORY)
 
     async def handle(self, command: LoginCommand) -> LoginResult:
-        user_auth = self.user_write_repo.find_by_username(command.username)
+        user_auth = self.user_write_repo.find_auth_by_username(command.username)
 
         if user_auth is None:
             raise InvalidCredentialException()

@@ -9,7 +9,7 @@ class SqlAlchemyConfig:
     env: Env = inject(Env)
 
     @property
-    def dsn_url(self) -> URL:
+    def url(self) -> URL:
         return URL.create(
             drivername=self.env.get_str("DB_DRIVER", "postgresql+psycopg"),
             database=self.env.get_str("DB_DATABASE"),

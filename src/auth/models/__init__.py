@@ -1,4 +1,4 @@
 from .role_alchemy_model import RoleAlchemyModel
 from .user_alchemy_model import UserAlchemyModel
 from .user_auth_alchemy_model import UserAuthAlchemyModel
-from .user_has_role_table import UserHasRoleAlchemyModel
+from .user_has_role_alchemy_model import UserHasRoleAlchemyModel

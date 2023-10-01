@@ -1,0 +1,3 @@
+from .create_appointment_body_dto import CreateAppointmentBodyDto
+from .create_clinic_body_dto import CreateClinicBodyDto
+from .register_patient_body_dto import RegisterPatientBodyDto

@@ -1,0 +1,7 @@
+from .get_admin_clinics.get_admin_clinics_handler import GetAdminClinicsHandler, GetAdminClinicsQuery
+from .get_clinic_appointments.get_clinic_appointments_handler import GetClinicAppointmentsHandler, GetClinicAppointmentsQuery
+from .get_clinics.get_clinics_handler import GetClinicsHandler, GetClinicsQuery
+from .get_patient_appointments.get_patient_appointments_handler import GetPatientAppointmentsHandler, GetPatientAppointmentsQuery
+from .get_patients.get_patients_handler import GetPatientsHandler, GetPatientsQuery
+
+query_handlers = [GetAdminClinicsHandler, GetClinicsHandler, GetPatientsHandler, GetClinicAppointmentsHandler, GetPatientAppointmentsHandler]

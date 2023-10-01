@@ -19,3 +19,9 @@ class InvalidCredentialException(AuthException, HTTPException):
     def __init__(self):
         super(InvalidCredentialException, self).__init__("Invalid credentials")
         super(HTTPException, self).__init__(status_code=HTTP_401_UNAUTHORIZED, detail=super(InvalidCredentialException, self).__str__())
+
+
+class NotLoggedInException(AuthException, HTTPException):
+    def __init__(self):
+        super(NotLoggedInException, self).__init__("Not logged in")
+        super(HTTPException, self).__init__(status_code=HTTP_401_UNAUTHORIZED, detail=super(NotLoggedInException, self).__str__())

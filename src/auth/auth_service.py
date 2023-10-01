@@ -6,10 +6,11 @@ from dihub.decorators import inject, provider
 from dihub.types import IProviderRunner
 from jwt.utils import get_int_from_datetime
 
+from src.auth.auth_exceptions import InvalidCredentialException
 from src.shared import BcryptHash
 from .config import AuthConfig
 from .constants import AUTH_SERVICE
-from .types import IAuthService, GenerateTokenResult
+from .types import IAuthService, GenerateTokenResult, ValidateTokenResult
 
 
 @provider(token=AUTH_SERVICE)
@@ -36,10 +37,22 @@ class AuthService(IAuthService, IProviderRunner):
             "sub": user_id,
             "aud": self.auth_config.jwt_audience,
             "iat": now,
-            "exp": expired_at
+            "exp": expired_at,
+            "iss": self.auth_config.jwt_issuer
         }, self.jwt_signing_key, alg=self.auth_config.jwt_rsa_alg)
 
         return {
             "access_token": token,
             'expired_at': expired_at
         }
+
+    def validate_token(self, token: str) -> ValidateTokenResult:
+        payload = self.jwt_instance.decode(token, self.jwt_signing_key, True, do_time_check=True)
+
+        if payload["iss"] is None or payload["iss"] != self.auth_config.jwt_issuer:
+            raise InvalidCredentialException()
+
+        if payload["aud"] is None or payload["aud"] != self.auth_config.jwt_audience:
+            raise InvalidCredentialException()
+
+        return {"user_id": payload["sub"]}
