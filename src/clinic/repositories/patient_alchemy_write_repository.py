@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Optional, Annotated
 
 from dihub.decorators import inject, provider
 from sqlalchemy import select
@@ -16,7 +16,7 @@ FindAllParams = IPatientAlchemyWriteRepository.FindAllParams
 
 @provider(token=PATIENT_WRITE_REPOSITORY)
 class PatientAlchemyWriteRepository(IPatientAlchemyWriteRepository):
-    engine: EngineProvider = inject(EngineProvider)
+    engine: Annotated[EngineProvider, inject(EngineProvider)]
 
     def insert(self, patient: PatientAlchemyModel):
         with Session(self.engine.engine) as session:

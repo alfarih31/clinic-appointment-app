@@ -1,3 +1,5 @@
+from typing import Annotated
+
 from dihub.decorators import inject
 from dihub_cqrs.decorators import command_handler
 from dihub_cqrs.types import ICommandHandler
@@ -10,8 +12,8 @@ from .register_command import RegisterCommand
 
 @command_handler(RegisterCommand)
 class RegisterHandler(ICommandHandler[RegisterCommand, None]):
-    user_write_repo: IUserWriteRepo = inject(USER_WRITE_REPOSITORY)
-    auth_service: IAuthService = inject(AUTH_SERVICE)
+    user_write_repo: Annotated[IUserWriteRepo, inject(USER_WRITE_REPOSITORY)]
+    auth_service: Annotated[IAuthService, inject(AUTH_SERVICE)]
 
     async def handle(self, command: RegisterCommand) -> None:
         hashed_password = self.auth_service.generate_password_hash(command.password)

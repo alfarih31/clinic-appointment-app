@@ -1,6 +1,6 @@
 from datetime import datetime
 from inspect import getmembers
-from typing import Optional, List
+from typing import Optional, List, Annotated
 
 from dihub.decorators import inject, provider
 from sqlalchemy import select, or_, and_
@@ -18,7 +18,7 @@ FindAllParams = IAppointmentAlchemyWriteRepository.FindAllParams
 
 @provider(token=APPOINTMENT_WRITE_REPOSITORY)
 class AppointmentAlchemyWriteRepository(IAppointmentAlchemyWriteRepository):
-    engine: EngineProvider = inject(EngineProvider)
+    engine: Annotated[EngineProvider, inject(EngineProvider)]
 
     async def insert(self, appointment: AppointmentAlchemyModel):
         async with async_sessionmaker(bind=self.engine.async_engine).begin() as session:

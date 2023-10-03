@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Annotated
 
 from dihub.decorators import provider, inject
 from sqlalchemy import select
@@ -12,7 +12,7 @@ from src.sql_alchemy import EngineProvider
 
 @provider(token=CLINIC_WRITE_REPOSITORY)
 class ClinicAlchemyWriteRepository(IClinicAlchemyWriteRepository):
-    engine: EngineProvider = inject(EngineProvider)
+    engine: Annotated[EngineProvider, inject(EngineProvider)]
 
     def insert(self, clinic: ClinicAlchemyModel):
         with Session(self.engine.engine) as session:

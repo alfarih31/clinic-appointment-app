@@ -1,4 +1,4 @@
-from typing import Optional, Type, List
+from typing import Optional, Type, List, Annotated
 
 from dihub.decorators import provider, inject
 from sqlalchemy import select
@@ -15,7 +15,7 @@ FindAllParams = IUserWriteRepo.FindAllParams
 
 @provider(token=USER_WRITE_REPOSITORY)
 class UserAlchemyWriteRepository(IUserWriteRepo):
-    engine: EngineProvider = inject(EngineProvider)
+    engine: Annotated[EngineProvider, inject(EngineProvider)]
 
     def insert(self, user: UserAlchemyModel):
         with Session(self.engine.engine) as session:
